@@ -1,0 +1,70 @@
+@using System
+@using System.Collections.Generic
+@using Sandbox.UI
+
+@namespace ShrimpleProfiler.UI
+@using global::ShrimpleProfiler.ProfilerEvents;
+@inherits Panel
+
+<!-- TODO: try RootPanel some day -->
+
+<root></root>
+
+<style>
+    ProfilerPanel {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+
+        flex-direction: column;
+        flex-wrap: nowrap;
+        gap: 16px;
+        justify-content: flex-end;
+        align-items: flex-start;
+
+        opacity: @((ShrimpleProfiler.The.HasActiveProfiles() ? 1.0f : 0.0f));
+
+        z-index: 9999;
+
+        transition: opacity 1s ease-in-out;
+    }
+</style>
+
+@code {
+    Dictionary<Profile, ProfilePanel> _profiles = new();
+
+    [NewProfileEvent]
+    protected void OnNewProfile(Profile profile, IList<double> histogram)
+    {
+        ProfilePanel p;
+        if (!_profiles.ContainsKey(profile))
+        {
+            p = new(profile);
+            _profiles[profile] = p;
+            AddChild(p);
+        }
+        else
+        {
+            p = _profiles[profile];
+        }
+
+        p.Update(histogram);
+    }
+
+    [RemovedProfileEvent]
+    protected void OnRemovedProfile(Profile profile)
+    {
+        if (!_profiles.ContainsKey(profile))
+            return;
+
+        _profiles[profile].Delete();
+        _profiles.Remove(profile);
+    }
+
+    protected override int BuildHash()
+    {
+        return HashCode.Combine(ShrimpleProfiler.The);
+    }
+}

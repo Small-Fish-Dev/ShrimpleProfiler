@@ -1,0 +1,84 @@
+@using System.Collections.Generic
+@using Sandbox.UI
+
+@namespace ShrimpleProfiler.UI
+@inherits Panel
+
+<root>
+    <h1>@_profile.MethodName</h1>
+    <label>Interval: @(_profile.Interval)s</label>
+</root>
+
+<style>
+    ProfilePanel {
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-items: stretch;
+        gap: 2px;
+
+        padding: 2px;
+        
+        min-width: 10%;
+
+        border: 1px solid black;
+
+        color: white;
+        background-color: #444;
+        
+        label {
+            font-size: 14px;
+
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .histogram {
+            flex-direction: row;
+            flex-wrap: nowrap;
+            gap: 2px;
+
+            align-items: flex-end;
+
+            background-color: #222;
+
+            height: 96px;
+
+            panel {
+                flex-grow: 1;
+                flex-basis: 0;
+
+                background-color: #aaa;
+
+                min-width: 2px;
+                min-height: 1px;
+            }
+        }
+    }
+</style>
+
+@code {
+    Profile _profile;
+    Panel _histogram;
+
+    public ProfilePanel(Profile profile)
+    {
+        _profile = profile;
+
+        _histogram = Add.Panel("histogram");
+        for (var i = 0; i < profile.Resolution; i++)
+            _histogram.Add.Panel();
+    }
+
+    public void Update(IList<double> histogram)
+    {
+        for (var i = 0; i < histogram.Count; i++)
+        {
+            var column = _histogram.GetChild(i);
+            column.Style.Height = Length.Percent((float)(histogram[i] * 100 / _profile.Interval));
+        }
+    }
+}
