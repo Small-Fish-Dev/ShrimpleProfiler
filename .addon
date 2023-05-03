@@ -21,6 +21,10 @@
       "NoWarn": "1701;1702;1591;",
       "References": [],
       "DistinctReferences": []
-    }
+    },
+    "Summary": "A shrimple profiler for your gamemode!",
+    "Description": "See https://github.com/Small-Fish-Dev/ShrimpleProfiler for the usage info.",
+    "Public": true,
+    "ReplaceTags": "shrimple profiler mit simple profile"
   }
 }
