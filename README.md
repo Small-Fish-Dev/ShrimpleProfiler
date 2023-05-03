@@ -13,10 +13,10 @@
 
 ## Usage
 
-### Getting started
+### Getting Started
 
  1. Include `fish.shrimpleprofiler` in your s&box project's settings -> Packages -> Package References
- 2. Add an instance of panel `<ShrimpleProfiler.UI.ProfilerPanel></ShrimpleProfiler.UI.ProfilerPanel>` to your UI
+ 2. Add an instance of panel `<ShrimpleProfiler.UI.ProfilerPanel></ShrimpleProfiler.UI.ProfilerPanel>` to your UI *(see Known Issues №1)*
  3. Add the following piece of code to your project:
  
 ```cs
@@ -42,9 +42,10 @@ Arguments:
  * `int resolution` - amount of bars in the chart
  * `double interval` - how often should we sample the performance
 
-## Known issues
+## Known Issues
 
- * The measurements might be imprecise. Contributions are welcome.
+ 1. We have tried to make use of the RootPanel to shrimplify the usage even further and get rid of the second step in *Getting Starter*, but it didn't work. We are still not sure if the issue is in our code or in the s&box itself
+ 2. The measurements might be imprecise. Contributions are welcome.
 
 ## License
 
