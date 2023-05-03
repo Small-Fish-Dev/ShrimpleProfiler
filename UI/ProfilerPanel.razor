@@ -24,11 +24,7 @@
         justify-content: flex-end;
         align-items: flex-start;
 
-        opacity: @((ShrimpleProfiler.The.HasActiveProfiles() ? 1.0f : 0.0f));
-
-        z-index: 9999;
-
-        transition: opacity 1s ease-in-out;
+        z-index: 9999; /* TODO: doesn't work on root panel */
     }
 </style>
 

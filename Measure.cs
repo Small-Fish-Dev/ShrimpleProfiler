@@ -4,7 +4,7 @@ using System.Runtime.CompilerServices;
 
 namespace ShrimpleProfiler;
 
-public sealed class Measure : IDisposable
+public struct Measure : IDisposable
 {
     private readonly Profile _profile;
 
