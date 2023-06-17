@@ -31,7 +31,7 @@ using (new ShrimpleProfiler.Measure(resolution: 10, interval: 0.016))
 #### ShrimpleProfiler.Measure.ctr
 
 ```cs
-public Measure([CallerMemberName] string caller = "Unknown method", int resolution = 5, double interval = 0.05)
+public Measure([CallerMemberName] string caller = "Unknown method", int resolution = 5, double interval = 0.05, bool showBars = true)
 ```
 
 Measure the time it takes to execute the code.
@@ -41,6 +41,7 @@ Arguments:
  * `string caller` - name of the measurement. Automatically filled with the method's name if not provided.
  * `int resolution` - amount of bars in the chart
  * `double interval` - how often should we sample the performance
+ * `bool showBars` - show or hide the histogram
 
 ## Known Issues
 
